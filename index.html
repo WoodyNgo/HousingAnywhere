@@ -354,6 +354,62 @@ dialog::backdrop{background:rgba(10,18,30,.55)}
 dialog h3{font-size:1.5rem;margin-bottom:10px}
 dialog p{color:var(--muted);margin-bottom:10px}
 dialog .row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* overview video */
+dialog.vdlg{padding:0;max-width:980px;width:calc(100% - 32px);background:transparent;overflow:visible}
+.player{position:relative;background:#002630;color:#fff;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/9;font-family:var(--body)}
+@media (max-width:640px){.player{aspect-ratio:4/5}}
+.stage{position:absolute;inset:0 0 118px 0;display:grid;place-items:center}
+.scene{position:absolute;inset:0;display:none;place-items:center;padding:28px}
+.scene.on{display:grid}
+@media (min-width:800px){.scene>div{transform:scale(1.3)}.vmonths{width:560px}}
+.cap{position:absolute;left:0;right:0;bottom:56px;padding:0 32px;text-align:center;font:700 clamp(1.05rem,2.4vw,1.55rem)/1.3 var(--display);letter-spacing:-0.01em;min-height:62px;display:flex;align-items:center;justify-content:center}
+.vbar{position:absolute;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;gap:14px;padding:0 18px;background:rgba(0,0,0,.22)}
+.vbtn{appearance:none;border:0;background:#FF4B27;color:#fff;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;flex:none}
+.vbtn svg{width:16px;height:16px}
+.vbtn.ghost{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
+.segs{flex:1;display:flex;gap:5px}
+.segs i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.22);overflow:hidden;position:relative}
+.segs i b{position:absolute;inset:0;width:0;background:#FF4B27}
+.vclose{position:absolute;top:-44px;right:0;appearance:none;border:0;background:transparent;color:#fff;font:700 1rem var(--body);cursor:pointer;padding:8px}
+.vtime{font-size:.85rem;opacity:.8;min-width:40px;text-align:right}
+.vtog{appearance:none;border:1.5px solid rgba(255,255,255,.45);background:transparent;color:#fff;border-radius:999px;padding:5px 11px;font:700 .8rem var(--body);cursor:pointer;flex:none}
+.vtog[aria-pressed="true"]{background:#fff;color:#002630;border-color:#fff}
+.vtog[aria-pressed="false"]{opacity:.7;text-decoration:line-through}
+@media (max-width:480px){.vtime{display:none}.vbar{gap:8px;padding:0 10px}}
+/* scene visuals */
+.vcard{background:#fff;color:#1B2D3A;border-radius:16px;padding:18px 20px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);min-width:min(340px,80vw)}
+.vcard h5{font:700 1.05rem var(--display);margin:0 0 10px}
+.vline{height:10px;border-radius:5px;background:#E5ECF1;margin:8px 0}
+.vmonths{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;width:min(640px,86vw)}
+@media (max-width:640px){.vmonths{grid-template-columns:repeat(6,1fr)}}
+.vmonths span{border-radius:10px;padding:12px 0;text-align:center;font:700 .9rem var(--display);background:rgba(255,255,255,.1);color:#fff}
+.vphotos{display:grid;grid-template-columns:repeat(5,minmax(0,78px));gap:8px}
+.vphotos .ph{border-radius:8px}
+.vphotos .ph .tag{opacity:1;transform:none}
+.vbadge{display:inline-flex;align-items:center;gap:8px;background:#DFF0EA;color:#1C7462;border-radius:999px;padding:7px 14px;font-weight:700;margin-top:12px}
+.vflag{display:inline-block;background:#FBE7EA;color:#B81530;border-radius:999px;padding:6px 12px;font-weight:700;font-size:.9rem;margin-top:14px}
+.vchat{display:flex;flex-direction:column;gap:10px;width:min(420px,82vw)}
+.vchat .b{padding:10px 14px;border-radius:14px;font-size:.95rem;max-width:85%;line-height:1.4}
+.vchat .t{background:#fff;color:#1B2D3A;border-bottom-left-radius:4px}
+.vchat .m{background:#FF4B27;color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+.vchat .n{background:#FBE7EA;color:#B81530;font-weight:700;font-size:.9rem;border-radius:12px;padding:10px 14px}
+.vtl{display:flex;align-items:center;gap:0;width:min(560px,84vw);margin-bottom:22px}
+.vtl .dot{width:18px;height:18px;border-radius:50%;border:3px solid #fff;flex:none}
+.vtl .ln{flex:1;height:3px;background:rgba(255,255,255,.3)}
+.vtl .dot.money{background:#4CC0A4;border-color:#4CC0A4}
+.vtll{display:flex;justify-content:space-between;width:min(600px,88vw);font-size:.85rem;opacity:.85;margin-top:-12px;margin-bottom:18px}
+.vamt{font:800 clamp(2.4rem,6vw,4rem)/1 var(--display);letter-spacing:-0.03em;text-align:center}
+.vend h4{font:800 clamp(1.6rem,4vw,2.6rem)/1.1 var(--display);letter-spacing:-0.02em;max-width:18ch;text-align:center;margin:0 auto 20px}
+.vend{text-align:center}
+.vhouse{width:64px;height:64px;color:#FF4B27;margin:0 auto 18px;display:block}
+/* scene animation */
+.scene .pop{opacity:0;transform:translateY(10px)}
+.scene.on .pop{animation:vpop .45s ease forwards;animation-delay:var(--d,0s)}
+.scene.on .fill{animation:vfill .3s ease forwards;animation-delay:var(--d,0s)}
+@keyframes vpop{to{opacity:1;transform:none}}
+@keyframes vfill{to{background:#FF4B27}}
+@media (prefers-reduced-motion: reduce){.scene .pop{opacity:1;transform:none}.scene .fill{background:#FF4B27}}
 </style>
 </head>
 <body>
@@ -430,8 +486,8 @@ dialog .row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
       <div class="stat">50,000+</div>
       <p>properties rented out through the platform.</p>
       <hr>
-      <blockquote>"[Quote from a landlord interview. Replace with a real, attributed quote from your research.]"</blockquote>
-      <cite>[Name], rents out their apartment in [city]</cite>
+      <blockquote>"I spend every winter working in Lisbon. My apartment used to sit empty for three months. Now it's booked before I've even packed, and I never had to show it to anyone."</blockquote>
+      <cite>Sofie, 41, rents out her apartment in Utrecht<span style="display:block;font-size:.78rem;opacity:.7;margin-top:4px">Illustrative example</span></cite>
     </aside>
   </div>
 </section>
@@ -710,7 +766,7 @@ dialog .row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 </main>
 
 <footer>
-  <div class="wrap"><button id="notesBtn" class="linkbtn" aria-pressed="false" style="display:block;margin-bottom:10px">Show design notes</button>Prototype created for the VU Amsterdam course Introduction to E-Business and Online Commerce. Figures on this page come from the HousingAnywhere case materials and the public HousingAnywhere landlord page. Quotes in brackets are placeholders for the team's own research.</div>
+  <div class="wrap"><button id="notesBtn" class="linkbtn" aria-pressed="false" style="display:block;margin-bottom:10px">Show design notes</button>Prototype created for the VU Amsterdam course Introduction to E-Business and Online Commerce. Figures on this page come from the HousingAnywhere case materials and the public HousingAnywhere landlord page. The landlord quote is an illustrative example, not a real customer.</div>
 </footer>
 
 <button class="btn assist-btn" id="assistBtn" aria-expanded="false" aria-controls="assist">Ask a question</button>
@@ -722,6 +778,44 @@ dialog .row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
   </div>
   <form id="assistForm"><label for="assistIn" class="hidden">Your question</label><input id="assistIn" placeholder="Type your question" autocomplete="off"><button class="btn small" type="submit">Ask</button></form>
 </div>
+
+<dialog id="videoDlg" class="vdlg" aria-label="30-second overview">
+  <button class="vclose" id="vClose">Close</button>
+  <div class="player">
+    <div class="stage">
+      <div class="scene" data-cap="Your apartment sits empty for months while you're away.">
+        <div><svg class="vhouse pop" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 12 13 4l9 8v10H4z"/><path d="M10 22v-6h6v6"/></svg><div class="vmonths"><span class="fill" style="--d:0.60s">Jan</span><span class="fill" style="--d:0.95s">Feb</span><span class="fill" style="--d:1.30s">Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div>
+      </div>
+      <div class="scene" data-cap="Sign up and verify your ID in about two minutes.">
+        <div class="vcard pop"><h5>Create your account</h5><div class="vline pop" style="--d:.4s;width:80%"></div><div class="vline pop" style="--d:.7s;width:60%"></div><div class="vline pop" style="--d:1s;width:70%"></div><span class="vbadge pop" style="--d:1.6s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>ID verified</span></div>
+      </div>
+      <div class="scene" data-cap="Add photos. The assistant writes your listing and flags what's missing.">
+        <div style="text-align:center"><div class="vphotos" id="vPhotos"></div><span class="vflag pop" style="--d:2.2s">No bathroom photo yet</span></div>
+      </div>
+      <div class="scene" data-cap="Mark your away months once. They repeat every year.">
+        <div style="text-align:center"><div class="vmonths"><span class="fill" style="--d:0.30s">Jan</span><span class="fill" style="--d:0.65s">Feb</span><span class="fill" style="--d:1.00s">Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div><span class="vbadge pop" style="--d:1.6s">Open for booking: Jan to Mar, every year</span></div>
+      </div>
+      <div class="scene" data-cap="Chat only with verified tenants who match your preferences.">
+        <div class="vchat"><div class="b t pop" style="--d:.3s">Hi! Is your apartment free from January to March?</div><div class="b m pop" style="--d:1.2s">Yes! Text me on WhatsApp</div><div class="n pop" style="--d:2s">Keep chats on HousingAnywhere to stay protected</div></div>
+      </div>
+      <div class="scene" data-cap="Get paid 48 hours after move-in. No chasing transfers.">
+        <div style="text-align:center"><div class="vtl"><span class="dot pop" style="--d:.2s"></span><span class="ln"></span><span class="dot pop" style="--d:.8s"></span><span class="ln"></span><span class="dot money pop" style="--d:1.4s"></span></div><div class="vtll"><span>Booked</span><span>Move-in</span><span>Paid</span></div><div class="vamt" id="vAmt">EUR 0</div></div>
+      </div>
+      <div class="scene vend" data-cap="">
+        <div><svg class="vhouse pop" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 12 13 4l9 8v10H4z"/><path d="M10 22v-6h6v6"/></svg><h4 class="pop" style="--d:.2s">Renting out your apartment shouldn't be a full&#8209;time job.</h4><button class="btn pop" style="--d:.6s" id="vStart">Start my listing</button></div>
+      </div>
+    </div>
+    <div class="cap" id="vCap" aria-live="polite"></div>
+    <div class="vbar">
+      <button class="vbtn" id="vPlay" aria-label="Pause"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2.5" width="3.5" height="11" rx="1"/><rect x="9.5" y="2.5" width="3.5" height="11" rx="1"/></svg></button>
+      <button class="vbtn ghost" id="vReplay" aria-label="Replay"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8a5 5 0 1 0 1.6-3.7"/><path d="M3 2.5v3h3" /></svg></button>
+      <button class="vtog" id="vVoice" aria-pressed="true">Voice</button>
+      <button class="vtog" id="vMusic" aria-pressed="true">Music</button>
+      <div class="segs" id="vSegs"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <span class="vtime" id="vTime">0:00</span>
+    </div>
+  </div>
+</dialog>
 
 <dialog id="startDlg">
   <h3>This is where the real sign-up starts</h3>
@@ -937,13 +1031,133 @@ dialog .row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
     if(dlg.showModal) dlg.showModal(); else alert($("#dlgText").textContent);
   }));
   $("#dlgClose").addEventListener("click",()=>dlg.close());
-  $("#videoBtn").addEventListener("click",()=>{
-    $("#dlgCarry").textContent="";
-    const h=dlg.querySelector("h3"), t=$("#dlgText"), oh=h.textContent, ot=t.textContent;
-    h.textContent="The 30-second overview goes here"; t.textContent="This slot is reserved for the short walkthrough video the team will produce.";
-    dlg.showModal();
-    dlg.addEventListener("close",()=>{h.textContent=oh; t.textContent=ot;},{once:true});
-  });
+
+  /* overview video (animated walkthrough) */
+  (function(){
+    const dlgV=$("#videoDlg"), scenes=$$("#videoDlg .scene"), cap=$("#vCap"), segs=$$("#vSegs b");
+    const DUR=5000, N=6, TOTAL=DUR*N;
+    const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>', PAUSE='<svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2.5" width="3.5" height="11" rx="1"/><rect x="9.5" y="2.5" width="3.5" height="11" rx="1"/></svg>';
+    let elapsed=0, last=0, playing=false, cur=-1, raf=null;
+    const ph=$("#vPhotos");
+    $$("#photos .ph svg").slice(0,4).forEach((svg,i)=>{
+      const d=document.createElement("div"); d.className="ph pop"; d.style.setProperty("--d",(0.25+0.3*i)+"s");
+      d.appendChild(svg.cloneNode(true));
+      const t=document.createElement("span"); t.className="tag"; t.textContent=["Living room","Bedroom","Kitchen","Balcony"][i]; d.appendChild(t);
+      ph.appendChild(d);
+    });
+    const empty=document.createElement("div"); empty.className="ph empty flag pop"; empty.style.setProperty("--d","1.6s"); empty.textContent="No photo"; ph.appendChild(empty);
+
+    /* sound: voice-over via the browser's speech engine, music via Web Audio */
+    const synth=window.speechSynthesis||null;
+    let voiceOn=!!synth, musicOn=true, voice=null, actx=null, master=null;
+    const VO=[
+      "Your apartment sits empty for months while you're away.",
+      "Sign up and verify your ID in about two minutes.",
+      "Add your photos. The assistant writes your listing, and tells you what's missing.",
+      "Mark your away months once. They repeat every year.",
+      "Chat only with verified tenants who match your preferences.",
+      "Get paid forty-eight hours after move-in. No chasing transfers.",
+      "Renting out your apartment shouldn't be a full-time job. Start your listing with HousingAnywhere."
+    ];
+    if(!synth){ $("#vVoice").style.display="none"; }
+    function pickVoice(){
+      const vs=synth?synth.getVoices():[];
+      const pref=[/Google UK English Female/i,/Sonia|Libby|Serena|Kate|Martha/i,/Samantha|Aria|Jenny|Natural/i,/Google US English/i];
+      for(const re of pref){ const v=vs.find(v=>/^en/i.test(v.lang)&&re.test(v.name)); if(v) return v; }
+      return vs.find(v=>/^en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+    }
+    if(synth){ voice=pickVoice(); synth.addEventListener&&synth.addEventListener("voiceschanged",()=>{voice=pickVoice();}); }
+    function say(i){
+      if(!synth||!voiceOn||!VO[i]) return;
+      synth.cancel();
+      const u=new SpeechSynthesisUtterance(VO[i]);
+      if(!voice) voice=pickVoice();
+      if(voice){ u.voice=voice; u.lang=voice.lang; } else u.lang="en-GB";
+      u.rate=1.02; u.pitch=1; u.volume=1;
+      synth.speak(u);
+    }
+    function stopVoice(){ if(synth) synth.cancel(); }
+    const CH=[[261.63,329.63,392.00,493.88],[220.00,261.63,329.63,392.00],[174.61,220.00,261.63,329.63],[196.00,246.94,293.66,392.00]];
+    function startMusic(seconds){
+      if(!musicOn) return;
+      const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+      actx=actx||new AC(); if(actx.state==="suspended") actx.resume();
+      stopMusic();
+      const t0=actx.currentTime+0.05, end=t0+seconds;
+      master=actx.createGain(); master.gain.setValueAtTime(0,t0); master.gain.linearRampToValueAtTime(0.55,t0+1.5);
+      master.gain.setValueAtTime(0.55,Math.max(t0+1.6,end-3)); master.gain.linearRampToValueAtTime(0,end);
+      const lp=actx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=1400; lp.connect(master); master.connect(actx.destination);
+      const note=(freq,start,len,peak,type)=>{
+        if(start>=end) return;
+        const o=actx.createOscillator(), g=actx.createGain();
+        o.type=type; o.frequency.value=freq;
+        g.gain.setValueAtTime(0,start); g.gain.linearRampToValueAtTime(peak,start+Math.min(0.35,len/3));
+        g.gain.setTargetAtTime(0,start+len*0.7,len*0.25);
+        o.connect(g); g.connect(lp); o.start(start); o.stop(Math.min(end,start+len+1));
+      };
+      const BAR=2.5;
+      for(let k=0;t0+k*BAR<end;k++){
+        const c=CH[k%4], st=t0+k*BAR;
+        c.forEach(fq=>note(fq,st,BAR+0.4,0.035,"sine"));
+        note(c[0]/2,st,BAR+0.2,0.06,"triangle");
+        [0,1,2,3].forEach(j=>note(c[(j+k)%4]*2,st+j*BAR/4,0.45,0.018,"triangle"));
+      }
+    }
+    function stopMusic(){ if(master){ try{ master.gain.cancelScheduledValues(0); master.disconnect(); }catch(e){} master=null; } }
+    function pauseAudio(){ stopVoice(); if(actx&&actx.state==="running") actx.suspend(); }
+    function resumeAudio(){ if(actx&&actx.state==="suspended") actx.resume(); }
+    $("#vVoice").addEventListener("click",function(){
+      voiceOn=!voiceOn; this.setAttribute("aria-pressed",voiceOn);
+      if(!voiceOn) stopVoice(); else if(playing) say(cur);
+    });
+    $("#vMusic").addEventListener("click",function(){
+      musicOn=!musicOn; this.setAttribute("aria-pressed",musicOn);
+      if(!musicOn) stopMusic(); else if(playing||elapsed<TOTAL) { startMusic((TOTAL-elapsed)/1000+4); if(!playing&&actx) actx.suspend(); }
+    });
+    function show(i){
+      if(i===cur) return; cur=i;
+      scenes.forEach((s,k)=>{ s.classList.remove("on"); if(k===i){ void s.offsetWidth; s.classList.add("on"); } });
+      cap.textContent=scenes[i].dataset.cap||"";
+      if(i===5) countUp();
+      if(dlgV.open) say(i);
+    }
+    function countUp(){
+      const target=parseInt(($("#payout").textContent||"").replace(/[^0-9]/g,""))||3420;
+      const el=$("#vAmt");
+      if(reduce){ el.textContent=eur(target); return; }
+      const t0=performance.now()+1400;
+      (function step(now){
+        const p=Math.min(1,Math.max(0,(now-t0)/1200));
+        el.textContent=eur(target*p);
+        if(p<1 && cur===5) requestAnimationFrame(step);
+      })(performance.now());
+    }
+    function render(){
+      segs.forEach((b,k)=>{ b.style.width=Math.min(100,Math.max(0,(elapsed-k*DUR)/DUR*100))+"%"; });
+      const sec=Math.floor(Math.min(elapsed,TOTAL)/1000); $("#vTime").textContent="0:"+String(sec).padStart(2,"0");
+      show(elapsed>=TOTAL?6:Math.min(N-1,Math.max(0,Math.floor(elapsed/DUR))));
+    }
+    function tick(now){
+      if(!playing) return;
+      elapsed=Math.max(0,elapsed+(now-last)); last=now;
+      if(elapsed>=TOTAL){ elapsed=TOTAL; render(); setPlaying(false,true); return; }
+      render(); raf=requestAnimationFrame(tick);
+    }
+    function setPlaying(p,ended){
+      playing=p; const b=$("#vPlay");
+      b.innerHTML=p?PAUSE:PLAY; b.setAttribute("aria-label",p?"Pause":"Play");
+      if(p){ resumeAudio(); last=performance.now(); raf=requestAnimationFrame(tick); }
+      else { if(raf) cancelAnimationFrame(raf); if(!ended) pauseAudio(); }
+    }
+    function restart(){ stopVoice(); startMusic(TOTAL/1000+4); elapsed=0; cur=-1; render(); setPlaying(true); }
+    $("#vPlay").addEventListener("click",()=>{ if(elapsed>=TOTAL){restart();return;} setPlaying(!playing); });
+    $("#vReplay").addEventListener("click",restart);
+    $("#videoBtn").addEventListener("click",()=>{ dlgV.showModal(); restart(); });
+    $("#vClose").addEventListener("click",()=>dlgV.close());
+    dlgV.addEventListener("close",()=>{ setPlaying(false); stopVoice(); stopMusic(); });
+    dlgV.addEventListener("click",e=>{ if(e.target===dlgV) dlgV.close(); });
+    $("#vStart").addEventListener("click",()=>{ dlgV.close(); document.querySelector("[data-start]").click(); });
+  })();
   document.addEventListener("keydown",e=>{ if(e.key==="Escape" && panel.classList.contains("open")){ openA(false); ab.focus(); } });
 })();
 </script>
